@@ -26,6 +26,7 @@
         h1 { font-size: 2.5rem; margin-bottom: 5px; color: #fff; }
         .subtitle { color: #38bdf8; font-size: 1.1rem; margin-bottom: 40px; font-weight: 400; }
         h3 { margin-bottom: 15px; font-size: 1.5rem; }
+        h4 { color: #38bdf8; margin-bottom: 10px; }
         
         /* Profile Section */
         .profile-container { display: flex; gap: 40px; align-items: flex-start; }
@@ -34,6 +35,17 @@
         .profile-text { flex: 3; line-height: 1.7; color: #cbd5e1; }
         .profile-text ul { margin-left: 20px; margin-top: 10px; }
         .profile-text li { margin-bottom: 8px; }
+
+        /* Currículo Section Styles */
+        .cv-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 20px; }
+        .cv-block { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 25px; margin-bottom: 25px; }
+        .cv-item { margin-bottom: 20px; }
+        .cv-item:last-child { margin-bottom: 0; }
+        .cv-meta { color: #94a3b8; font-size: 0.9rem; margin-bottom: 5px; }
+        .cv-list { margin-left: 20px; margin-top: 5px; color: #cbd5e1; }
+        .cv-list li { margin-bottom: 5px; }
+        .btn-download { background-color: #38bdf8; color: #0f172a; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background-color 0.2s; border: none; cursor: pointer; }
+        .btn-download:hover { background-color: #0ea5e9; }
 
         /* Project Cards */
         .project-card { background-color: #1e293b; border-radius: 12px; padding: 30px; border: 1px solid #334155; margin-bottom: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: transform 0.2s, border-color 0.2s; }
@@ -97,6 +109,7 @@
     <nav>
         <h2>📂 Navegação</h2>
         <button id="nav-sobre" class="nav-btn active" onclick="showPage('sobre')">🏠 Sobre mim</button>
+        <button id="nav-curriculo" class="nav-btn" onclick="showPage('curriculo')">📄 Currículo</button>
         <button id="nav-projetos" class="nav-btn" onclick="showPage('projetos')">🚀 Projetos</button>
         <button id="nav-tecnologias" class="nav-btn" onclick="showPage('tecnologias')">🛠️ Tecnologias</button>
         <button id="nav-contato" class="nav-btn" onclick="showPage('contato')">📬 Contato</button>
@@ -114,7 +127,7 @@
                 </div>
                 <div class="profile-text">
                     <h3>👋 Olá, seja bem-vindo ao meu espaço!</h3>
-                    <p>Sou <strong>Mauricio Prado Pereira</strong>, profissional de <strong>Tecnologia da Informação</strong> focado em arquitetar soluções que eliminam o trabalho manual e transformam dados brutos in inteligência operacional.</p>
+                    <p>Sou <strong>Mauricio Prado Pereira</strong>, profissional de <strong>Tecnologia da Informação</strong> focado em arquitetar soluções que eliminam o trabalho manual e transformam dados brutos em inteligência operacional.</p>
                     <br>
                     <h4>O que eu faço:</h4>
                     <ul>
@@ -127,6 +140,80 @@
                     <p>🚀 Aplico stacks modernas como <strong>n8n, JavaScript (Tampermonkey) e Google Apps Script</strong> para injetar produtividade e governança por onde passo.</p>
                     <br>
                     <p>🌱 <em>Foco atual:</em> Evolução contínua em arquiteturas de automação, transformação digital e soluções inteligentes focadas em eficiência operacional e setor público.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CURRÍCULO -->
+        <section id="curriculo" class="page">
+            <div class="cv-header">
+                <div>
+                    <h1>📄 Meu Currículo</h1>
+                    <div class="subtitle">Resumo da trajetória acadêmica, competências e experiência profissional.</div>
+                </div>
+                <!-- Substitua o '#' pelo caminho real do seu arquivo de currículo (ex: 'arquivos/curriculo.pdf') -->
+                <a href="meu-curriculo.pdf" download="Curriculo_Mauricio_Prado_Pereira.pdf" class="btn-download">
+                    📥 Baixar Currículo (PDF)
+                </a>
+            </div>
+
+            <div class="cv-block">
+                <h4>🎯 Resumo Profissional</h4>
+                <p style="color: #cbd5e1; line-height: 1.6;">Profissional entusiasta em Tecnologia da Informação, buscando oportunidades para aplicar conhecimentos acadêmicos e desenvolver habilidades na área. Graduado em Sistemas de Informação, possuo sólida base teórica e estou ansioso para contribuir positivamente em ambientes profissionais desafiadores.</p>
+            </div>
+
+            <div class="cv-block">
+                <h4>🎓 Formação Acadêmica</h4>
+                <div class="cv-item">
+                    <div class="cv-meta">2019 - 2024</div>
+                    <strong style="color: #fff;">Graduação em Sistemas de Informação</strong>
+                    <p style="color: #94a3b8;">Centro Universitário Santa Terezinha (CEST)</p>
+                </div>
+                <div class="cv-item" style="margin-top: 15px;">
+                    <div class="cv-meta">2013 - 2015</div>
+                    <strong style="color: #fff;">Técnico em Informática</strong>
+                    <p style="color: #94a3b8;">Fucapi</p>
+                </div>
+            </div>
+
+            <div class="cv-block">
+                <h4>💼 Experiência Profissional</h4>
+                <div class="cv-item">
+                    <div class="cv-meta">Atual</div>
+                    <strong style="color: #fff;">Suporte Especializado no PJe - Interop (TJMA)</strong>
+                    <ul class="cv-list">
+                        <li>Cadastro de Usuários e Tratamento de Erros Processuais.</li>
+                        <li>Controle de Usuários e Resolução de Erros de Tramitação.</li>
+                    </ul>
+                </div>
+                <div class="cv-item" style="margin-top: 20px;">
+                    <div class="cv-meta">Anterior</div>
+                    <strong style="color: #fff;">Técnico de Suporte N1 - Interop (TJMA)</strong>
+                    <ul class="cv-list">
+                        <li>Instalação e configuração de software.</li>
+                        <li>Orientar usuários sobre o uso adequado de software.</li>
+                        <li>Atuação focada em Helpdesk e Service Desk.</li>
+                    </ul>
+                </div>
+                <div class="cv-item" style="margin-top: 20px;">
+                    <div class="cv-meta">Técnico de Informática</div>
+                    <strong style="color: #fff;">Técnico de Informática - Escola Técnica Ana Neri</strong>
+                    <ul class="cv-list">
+                        <li>Instalação e configuração de hardware e software.</li>
+                        <li>Realização de verificações e manutenções preventivas em equipamentos.</li>
+                        <li>Diagnóstico e resolução de problemas técnicos com hardware, software ou rede.</li>
+                        <li>Monitoramento de sistemas para identificar possíveis problemas e orientação a usuários.</li>
+                    </ul>
+                </div>
+                <div class="cv-item" style="margin-top: 20px;">
+                    <div class="cv-meta">Estágio</div>
+                    <strong style="color: #fff;">Estágio Supervisionado - Escola Técnica Ana Neri</strong>
+                    <ul class="cv-list">
+                        <li>Instalação e configuração de hardware e software.</li>
+                        <li>Realização de verificações e manutenções preventivas em equipamentos.</li>
+                        <li>Diagnóstico e resolução de problemas técnicos com hardware, software ou rede.</li>
+                        <li>Monitoramento de sistemas para identificar possíveis problemas e orientação a usuários.</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -450,7 +537,7 @@
             tourStep = 1;
             showPage('sobre');
             botText.innerHTML = "Aqui na aba <strong>Sobre Mim</strong> você confere a especialidade dele em criar Web Scrapers, APIs, fluxos de ETL e integrações inteligentes.";
-            botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Projetos ➡️</button>`;
+            botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Currículo 📄</button>`;
         }
 
         function scrollToElement(elementId) {
@@ -462,48 +549,54 @@
             tourStep++;
             
             if (tourStep === 2) {
+                showPage('curriculo');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                botText.innerHTML = "Na aba <strong>Currículo</strong> você tem acesso ao histórico completo de formação, atuação no TJMA e competências do Mauricio, com opção de download.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Projetos 🚀</button>`;
+            }
+            else if (tourStep === 3) {
                 showPage('projetos');
                 scrollToElement('proj-glpi-ext');
                 botText.innerHTML = "<strong>Projeto 1: Extensão GLPI</strong><br>Desenvolvida em JavaScript puro para automação cirúrgica de chamados, criação em lote e segurança ponta a ponta com criptografia AES-GCM.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             } 
-            else if (tourStep === 3) {
+            else if (tourStep === 4) {
                 scrollToElement('proj-glpi-fluxo');
-                botText.innerHTML = "<strong>Projeto 2: Formulário Inteligente GLPI</strong><br>Este script automatiza rotas complexas. Com o CPF, ele puxa o requerente, localidade, telefone do setor e cria telas dinâmicas de cadastro sem quebrar o fluxo do técnico.";
+                botText.innerHTML = "<strong>Projeto 2: Formulário Inteligente GLPI</strong><br>Este script automatiza rotas complexas. Com o CPF, ele puxa o requerente, localidade, telefone do setor e cria telas dinâmicas de cadastro.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             } 
-            else if (tourStep === 4) {
-                scrollToElement('proj-rh');
-                botText.innerHTML = "<strong>Projeto 3: Automação de RH</strong><br>Criado com n8n, este pipeline orquestra todo o processo seletivo: captura dados de formulários, atualiza planilhas, envia e-mails e agenda entrevistas no Google Calendar.";
-                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
-            }
             else if (tourStep === 5) {
-                scrollToElement('proj-scraping');
-                botText.innerHTML = "<strong>Projeto 4: Scraping de E-commerce</strong><br>Robô estruturado em Python (BeautifulSoup e Requests) construído de forma modular para varredura ágil e extração limpa de dados do Mercado Livre.";
+                scrollToElement('proj-rh');
+                botText.innerHTML = "<strong>Projeto 3: Automação de RH</strong><br>Criado com n8n, este pipeline orquestra todo o processo seletivo: captura dados de formulários, atualiza planilhas e agenda entrevistas.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 6) {
-                scrollToElement('proj-dados');
-                botText.innerHTML = "<strong>Projeto 5: Engenharia de Dados</strong><br>Pipelines ETL robustos criados com Python e Apps Script. Eles higienizam dados brutos extraídos do service desk e alimentam painéis interativos no Looker Studio.";
+                scrollToElement('proj-scraping');
+                botText.innerHTML = "<strong>Projeto 4: Scraping de E-commerce</strong><br>Robô estruturado em Python (BeautifulSoup e Requests) construído de forma modular para extração limpa de dados do Mercado Livre.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 7) {
-                scrollToElement('proj-senhas');
-                botText.innerHTML = "<strong>Projeto 6: Validador de Senhas</strong><br>Um utilitário em Python focado em cibersegurança que faz o cálculo de entropia bit a bit e consome a API Have I Been Pwned para checar vazamentos históricos.";
-                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Último Projeto ➡️</button>`;
+                scrollToElement('proj-dados');
+                botText.innerHTML = "<strong>Projeto 5: Engenharia de Dados</strong><br>Pipelines ETL robustos criados com Python e Apps Script para higienizar dados e alimentar painéis no Looker Studio.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 8) {
-                scrollToElement('proj-editais');
-                botText.innerHTML = "<strong>Projeto 7: Monitor de Editais</strong><br>Um Web Scraper inteligente rodando em infraestrutura serverless (GitHub Actions) com Selenium que vigia editais abertos e envia alertas na hora via Telegram API.";
-                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Tecnologias 🛠️</button>`;
+                scrollToElement('proj-senhas');
+                botText.innerHTML = "<strong>Projeto 6: Validador de Senhas</strong><br>Um utilitário em Python focado em cibersegurança que faz o cálculo de entropia e consome a API Have I Been Pwned.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Último Projeto ➡️</button>`;
             }
             else if (tourStep === 9) {
+                scrollToElement('proj-editais');
+                botText.innerHTML = "<strong>Projeto 7: Monitor de Editais</strong><br>Um Web Scraper inteligente rodando via GitHub Actions com Selenium que vigia editais abertos e envia alertas via Telegram.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Tecnologias 🛠️</button>`;
+            }
+            else if (tourStep === 10) {
                 showPage('tecnologias');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                botText.innerHTML = "Na aba de <strong>Tecnologias</strong> você vê a infra, frameworks corporativos e as linguagens de domínio, como Python, Tampermonkey, SQL e n8n.";
+                botText.innerHTML = "Na aba de <strong>Tecnologias</strong> você vê os frameworks corporativos e as linguagens de domínio, como Python, Tampermonkey, SQL e n8n.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Contato 📬</button>`;
             } 
-            else if (tourStep === 10) {
+            else if (tourStep === 11) {
                 showPage('contato');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 botText.innerHTML = "Precisa automatizar rotinas ou extrair inteligência de dados operacionais? Fale com ele agora via WhatsApp ou LinkedIn!";
