@@ -103,6 +103,7 @@
     </nav>
 
     <main>
+        <!-- SOBRE MIM -->
         <section id="sobre" class="page active">
             <h1>💻 Portfólio – Mauricio Prado Pereira</h1>
             <div class="subtitle">Automação • Dados • Tecnologia da Informação</div>
@@ -113,7 +114,7 @@
                 </div>
                 <div class="profile-text">
                     <h3>👋 Olá, seja bem-vindo ao meu espaço!</h3>
-                    <p>Sou <strong>Mauricio Prado Pereira</strong>, profissional de <strong>Tecnologia da Informação</strong> focado em arquitetar soluções que eliminam o trabalho manual e transformam dados brutos em inteligência operacional.</p>
+                    <p>Sou <strong>Mauricio Prado Pereira</strong>, profissional de <strong>Tecnologia da Informação</strong> focado em arquitetar soluções que eliminam o trabalho manual e transformam dados brutos in inteligência operacional.</p>
                     <br>
                     <h4>O que eu faço:</h4>
                     <ul>
@@ -130,10 +131,12 @@
             </div>
         </section>
 
+        <!-- PROJETOS -->
         <section id="projetos" class="page">
             <h1>🚀 Projetos em Destaque</h1>
             <div class="subtitle">Construindo soluções robustas para resolver problemas reais de negócios e workflows.</div>
 
+            <!-- Projeto 1 -->
             <div class="project-card" id="proj-glpi-ext">
                 <div class="project-header">
                     <div class="project-icon">🔧</div>
@@ -152,6 +155,7 @@
                 </div>
             </div>
 
+            <!-- Projeto 1.2 -->
             <div class="project-card" id="proj-glpi-fluxo">
                 <div class="project-header">
                     <div class="project-icon">🔧</div>
@@ -176,6 +180,7 @@
                 </div>
             </div>
 
+            <!-- Projeto 2 -->
             <div class="project-card" id="proj-rh">
                 <div class="project-header">
                     <div class="project-icon">⚙️</div>
@@ -194,6 +199,7 @@
                 </div>
             </div>
 
+            <!-- Projeto 3 -->
             <div class="project-card" id="proj-scraping">
                 <div class="project-header">
                     <div class="project-icon">🌐</div>
@@ -213,6 +219,7 @@
                 </div>
             </div>
 
+            <!-- Projeto 4 -->
             <div class="project-card" id="proj-dados">
                 <div class="project-header">
                     <div class="project-icon">📊</div>
@@ -233,6 +240,7 @@
                 </div>
             </div>
 
+            <!-- Projeto 5 -->
             <div class="project-card" id="proj-senhas">
                 <div class="project-header">
                     <div class="project-icon">🔐</div>
@@ -251,6 +259,7 @@
                 </div>
             </div>
 
+            <!-- Projeto 6 -->
             <div class="project-card" id="proj-editais">
                 <div class="project-header">
                     <div class="project-icon">🤖</div>
@@ -272,6 +281,7 @@
             </div>
         </section>
 
+        <!-- TECNOLOGIAS -->
         <section id="tecnologias" class="page">
             <h1>🛠️ Stack Tecnológica & Competências</h1>
             <div class="subtitle">Uma visão geral das ferramentas e linguagens que domino para desenvolver projetos ponta a ponta.</div>
@@ -304,6 +314,7 @@
             </div>
         </section>
 
+        <!-- CONTATO -->
         <section id="contato" class="page">
             <h1>📬 Vamos construir algo juntos?</h1>
             <div class="subtitle">Sinta-se à vontade para entrar em contato para projetos, parcerias ou trocar uma ideia sobre tecnologia.</div>
@@ -328,11 +339,13 @@
         </section>
     </main>
 
+    <!-- ESTRUTURA DO MODAL (LIGHTBOX) -->
     <div id="previewModal" class="image-modal" onclick="closeImage()">
         <span class="modal-close" onclick="closeImage()">&times;</span>
         <img class="modal-content" id="modalImg" onclick="event.stopPropagation()">
     </div>
 
+    <!-- ESTRUTURA DO ROBÔ AUXILIAR -->
     <div class="bot-container">
         <div class="bot-bubble" id="botBubble">
             <div id="botText">Olá! Eu sou o assistente de automação do Mauricio. Quer fazer um tour rápido pelo portfólio?</div>
@@ -378,7 +391,7 @@
         function closeImage() { modal.classList.remove('open'); }
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeImage(); });
 
-        // --- SISTEMA DE TOUR DO ROBÔ (BLINDAGEM DE ESCOPO COM EXPANSÃO AUTOMÁTICA) ---
+        // --- SISTEMA DE TOUR DO ROBÔ ATUALIZADO (PASSO A PASSO DE PROJETOS) ---
         const botContainer = document.querySelector('.bot-container');
         const botBubble = document.getElementById('botBubble');
         const botText = document.getElementById('botText');
@@ -426,7 +439,6 @@
 
         function resetBotMsg() {
             tourStep = 0;
-            closeImage();
             botText.innerHTML = "Olá! Eu sou o assistente de automação do Mauricio. Quer fazer um tour rápido pelo portfólio?";
             botBtns.innerHTML = `
                 <button class="bot-btn secondary" id="btnRecusar">Não, vlw</button>
@@ -441,18 +453,9 @@
             botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Projetos ➡️</button>`;
         }
 
-        function focarProjeto(cardId) {
-            closeImage(); // Fecha o modal do passo anterior
-            const card = document.getElementById(cardId);
-            if (card) {
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                const img = card.querySelector('.project-gallery img');
-                if (img && img.style.display !== 'none') {
-                    setTimeout(() => {
-                        img.click(); // Abre a imagem dinamicamente
-                    }, 350); // Aguarda a rolagem da página terminar
-                }
-            }
+        function scrollToElement(elementId) {
+            const el = document.getElementById(elementId);
+            if(el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         function nextTourStep() {
@@ -460,42 +463,41 @@
             
             if (tourStep === 2) {
                 showPage('projetos');
-                focarProjeto('proj-glpi-ext');
+                scrollToElement('proj-glpi-ext');
                 botText.innerHTML = "<strong>Projeto 1: Extensão GLPI</strong><br>Desenvolvida em JavaScript puro para automação cirúrgica de chamados, criação em lote e segurança ponta a ponta com criptografia AES-GCM.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             } 
             else if (tourStep === 3) {
-                focarProjeto('proj-glpi-fluxo');
+                scrollToElement('proj-glpi-fluxo');
                 botText.innerHTML = "<strong>Projeto 2: Formulário Inteligente GLPI</strong><br>Este script automatiza rotas complexas. Com o CPF, ele puxa o requerente, localidade, telefone do setor e cria telas dinâmicas de cadastro sem quebrar o fluxo do técnico.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             } 
             else if (tourStep === 4) {
-                focarProjeto('proj-rh');
+                scrollToElement('proj-rh');
                 botText.innerHTML = "<strong>Projeto 3: Automação de RH</strong><br>Criado com n8n, este pipeline orquestra todo o processo seletivo: captura dados de formulários, atualiza planilhas, envia e-mails e agenda entrevistas no Google Calendar.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 5) {
-                focarProjeto('proj-scraping');
+                scrollToElement('proj-scraping');
                 botText.innerHTML = "<strong>Projeto 4: Scraping de E-commerce</strong><br>Robô estruturado em Python (BeautifulSoup e Requests) construído de forma modular para varredura ágil e extração limpa de dados do Mercado Livre.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 6) {
-                focarProjeto('proj-dados');
+                scrollToElement('proj-dados');
                 botText.innerHTML = "<strong>Projeto 5: Engenharia de Dados</strong><br>Pipelines ETL robustos criados com Python e Apps Script. Eles higienizam dados brutos extraídos do service desk e alimentam painéis interativos no Looker Studio.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 7) {
-                focarProjeto('proj-senhas');
+                scrollToElement('proj-senhas');
                 botText.innerHTML = "<strong>Projeto 6: Validador de Senhas</strong><br>Um utilitário em Python focado em cibersegurança que faz o cálculo de entropia bit a bit e consome a API Have I Been Pwned para checar vazamentos históricos.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Último Projeto ➡️</button>`;
             }
             else if (tourStep === 8) {
-                focarProjeto('proj-editais');
+                scrollToElement('proj-editais');
                 botText.innerHTML = "<strong>Projeto 7: Monitor de Editais</strong><br>Um Web Scraper inteligente rodando em infraestrutura serverless (GitHub Actions) com Selenium que vigia editais abertos e envia alertas na hora via Telegram API.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Tecnologias 🛠️</button>`;
             }
             else if (tourStep === 9) {
-                closeImage();
                 showPage('tecnologias');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 botText.innerHTML = "Na aba de <strong>Tecnologias</strong> você vê a infra, frameworks corporativos e as linguagens de domínio, como Python, Tampermonkey, SQL e n8n.";
