@@ -10,9 +10,9 @@
         body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; display: flex; min-height: 100vh; }
         
         /* Sidebar Navigation */
-        nav { width: 280px; background-color: #1e293b; padding: 30px 20px; border-right: 1px solid #334155; display: flex; flex-direction: column; gap: 20px; position: fixed; height: 100vh; }
+        nav { width: 280px; background-color: #1e293b; padding: 30px 20px; border-right: 1px solid #334155; display: flex; flex-direction: column; gap: 20px; position: fixed; height: 100vh; z-index: 10; }
         nav h2 { font-size: 1.2rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
-        nav button { background: none; border: none; color: #94a3b8; text-align: left; padding: 12px 15px; font-size: 1rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.2s ease; }
+        nav button { background: none; border: none; color: #94a3b8; text-align: left; padding: 12px 15px; font-size: 1rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.2s ease; width: 100%; }
         nav button:hover { background-color: #334155; color: #f8fafc; }
         nav button.active { background-color: #38bdf8; color: #0f172a; }
 
@@ -44,7 +44,8 @@
         .tech-badge { background-color: #0f172a; color: #38bdf8; border: 1px solid #334155; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
         .project-description { color: #cbd5e1; line-height: 1.6; margin-bottom: 20px; }
         .project-gallery { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px; }
-        .project-gallery img { width: 100%; max-width: 320px; border-radius: 8px; border: 1px solid #334155; }
+        .project-gallery img { width: 100%; max-width: 320px; border-radius: 8px; border: 1px solid #334155; cursor: pointer; transition: opacity 0.2s ease; }
+        .project-gallery img:hover { opacity: 0.85; }
 
         /* Tech Grid */
         .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
@@ -58,20 +59,50 @@
         .contact-box h4 { color: #38bdf8; margin-bottom: 10px; font-size: 1.1rem; }
         .btn-link { display: block; width: 100%; background-color: #38bdf8; color: #0f172a; text-align: center; padding: 15px; border-radius: 8px; font-weight: bold; text-decoration: none; margin-bottom: 15px; transition: background-color 0.2s; }
         .btn-link:hover { background-color: #0ea5e9; }
+
+        /* Modal Lightbox */
+        .image-modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.9); align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+        .image-modal.open { display: flex; opacity: 1; }
+        .modal-content { max-width: 85%; max-height: 85%; border-radius: 8px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border: 2px solid #334155; transform: scale(0.95); transition: transform 0.3s ease; }
+        .image-modal.open .modal-content { transform: scale(1); }
+        .modal-close { position: absolute; top: 20px; right: 30px; color: #94a3b8; font-size: 2.5rem; font-weight: 300; cursor: pointer; transition: color 0.2s; user-select: none; }
+        .modal-close:hover { color: #fff; }
+
+        /* --- ESTILOS DO ASSISTENTE ROBÔ --- */
+        .bot-container { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; z-index: 999; font-family: 'Inter', sans-serif; }
+        .bot-bubble { background-color: #1e293b; color: #f8fafc; border: 1px solid #334155; padding: 15px; border-radius: 12px 12px 0 12px; max-width: 280px; font-size: 0.9rem; line-height: 1.5; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); animation: float 3s ease-in-out infinite; display: none; }
+        .bot-bubble strong { color: #38bdf8; }
+        .bot-buttons { display: flex; gap: 8px; margin-top: 10px; justify-content: flex-end; }
+        .bot-btn { background-color: #38bdf8; color: #0f172a; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
+        .bot-btn:hover { background-color: #0ea5e9; }
+        .bot-btn.secondary { background-color: #475569; color: #f8fafc; }
+        .bot-btn.secondary:hover { background-color: #334155; }
+        
+        .bot-avatar { width: 65px; height: 65px; background: radial-gradient(circle, #38bdf8 0%, #0ea5e9 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; cursor: pointer; box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3); transition: transform 0.2s; animation: float Avatar 3s ease-in-out infinite; position: relative; border: 2px solid #fff; }
+        .bot-avatar:hover { transform: scale(1.05); }
+        .bot-pulse { position: absolute; width: 100%; height: 100%; background-color: #38bdf8; border-radius: 50%; z-index: -1; animation: pulse 2s infinite; opacity: 0; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <h2>📂 Navegação</h2>
-        <button class="nav-btn active" onclick="showPage('sobre')">🏠 Sobre mim</button>
-        <button class="nav-btn" onclick="showPage('projetos')">🚀 Projetos</button>
-        <button class="nav-btn" onclick="showPage('tecnologias')">🛠️ Tecnologias</button>
-        <button class="nav-btn" onclick="showPage('contato')">📬 Contato</button>
+        <button id="nav-sobre" class="nav-btn active" onclick="showPage('sobre')">🏠 Sobre mim</button>
+        <button id="nav-projetos" class="nav-btn" onclick="showPage('projetos')">🚀 Projetos</button>
+        <button id="nav-tecnologias" class="nav-btn" onclick="showPage('tecnologias')">🛠️ Tecnologias</button>
+        <button id="nav-contato" class="nav-btn" onclick="showPage('contato')">📬 Contato</button>
     </nav>
 
     <main>
-        <!-- SOBRE MIM -->
         <section id="sobre" class="page active">
             <h1>💻 Portfólio – Mauricio Prado Pereira</h1>
             <div class="subtitle">Automação • Dados • Tecnologia da Informação</div>
@@ -99,13 +130,11 @@
             </div>
         </section>
 
-        <!-- PROJETOS -->
         <section id="projetos" class="page">
             <h1>🚀 Projetos em Destaque</h1>
             <div class="subtitle">Construindo soluções robustas para resolver problemas reais de negócios e workflows.</div>
 
-            <!-- Projeto 1 -->
-            <div class="project-card">
+            <div class="project-card" id="proj-glpi-ext">
                 <div class="project-header">
                     <div class="project-icon">🔧</div>
                     <h3>Extensão de Automação para GLPI</h3>
@@ -123,9 +152,7 @@
                 </div>
             </div>
 
-
-            <!-- Projeto 1 -->
-            <div class="project-card">
+            <div class="project-card" id="proj-glpi-fluxo">
                 <div class="project-header">
                     <div class="project-icon">🔧</div>
                     <h3>Automação de Fluxo e Validação de Dados: Formulário Inteligente para Abertura de Chamados (GLPI)</h3>
@@ -136,23 +163,20 @@
                     <span class="tech-badge">Web Crypto API</span>
                 </div>
                 <div class="project-description">
-Fluxo Automatizado "Buscar Servidor":
-Ao inserir a Matrícula ou o CPF do funcionário institucional, o script realiza uma consulta automática na base de dados. O sistema não apenas identifica o requerente, mas também preeche de forma automatizada o local de atendimento vinculado àquele servidor. Com base na localidade identificada, o formulário realiza uma segunda busca lógica e autopreeche instantaneamente o campo de telefone/contato correspondente àquele setor. O técnico não precisa digitar uma única linha de informação geográfica ou de contato.
-
-Fluxo Inteligente "Buscar Externo" com Verificação de Cadastro:
-Para atender o público externo, o botão realiza uma varredura na base de dados (via CPF ou e-mail).
-
-Se o usuário já possuir cadastro: Seus dados são puxados automaticamente para o chamado.
-
-Se o usuário não for encontrado: O sistema intercepta o fluxo e abre dinamicamente uma tela de cadastro integrado na própria interface. Assim que o técnico conclui o registro rápido do novo usuário externo, o sistema retorna ao formulário principal e continua o processo de abertura do chamado sem perda de progresso ou quebra de navegação.                </div>
+                    Fluxo Automatizado "Buscar Servidor":<br>
+                    Ao inserir a Matrícula ou o CPF do funcionário institucional, o script realiza uma consulta automática na base de dados. O sistema não apenas identifica o requerente, mas também preenche de forma automatizada o local de atendimento vinculado àquele servidor. Com base na localidade identificada, o formulário realiza uma segunda busca lógica e autopreenche instantaneamente o campo de telefone/contato correspondente àquele setor. O técnico não precisa digitar uma única linha de informação geográfica ou de contato.<br><br>
+                    Fluxo Inteligente "Buscar Externo" com Verificação de Cadastro:<br>
+                    Para atender o público externo, o botão realiza uma varredura na base de dados (via CPF ou e-mail).<br><br>
+                    Se o usuário já possuir cadastro: Seus dados são puxados automaticamente para o chamado.<br><br>
+                    Se o usuário não for encontrado: O sistema intercepta o fluxo e abre dinamicamente uma tela de cadastro integrado na própria interface. Assim que o técnico conclui o registro rápido do novo usuário externo, o sistema retorna ao formulário principal e continua o processo de abertura do chamado sem perda de progresso ou quebra de navegação.
+                </div>
                 <div class="project-gallery">
                     <img src="imagens/requi_1.png" alt="Interface GLPI" onerror="this.style.display='none'">
                     <img src="imagens/requi_2.png" alt="Interface GLPI" onerror="this.style.display='none'">
                 </div>
             </div>
 
-            <!-- Projeto 2 -->
-            <div class="project-card">
+            <div class="project-card" id="proj-rh">
                 <div class="project-header">
                     <div class="project-icon">⚙️</div>
                     <h3>Automatização de Processos de RH</h3>
@@ -170,8 +194,7 @@ Se o usuário não for encontrado: O sistema intercepta o fluxo e abre dinamicam
                 </div>
             </div>
 
-            <!-- Projeto 3 -->
-            <div class="project-card">
+            <div class="project-card" id="proj-scraping">
                 <div class="project-header">
                     <div class="project-icon">🌐</div>
                     <h3>Automação de Consultas Online & Web Scraping</h3>
@@ -190,8 +213,7 @@ Se o usuário não for encontrado: O sistema intercepta o fluxo e abre dinamicam
                 </div>
             </div>
 
-            <!-- Projeto 4 -->
-            <div class="project-card">
+            <div class="project-card" id="proj-dados">
                 <div class="project-header">
                     <div class="project-icon">📊</div>
                     <h3>Engenharia de Dados com Planilhas & Looker Studio</h3>
@@ -211,8 +233,7 @@ Se o usuário não for encontrado: O sistema intercepta o fluxo e abre dinamicam
                 </div>
             </div>
 
-            <!-- Projeto 5 -->
-            <div class="project-card">
+            <div class="project-card" id="proj-senhas">
                 <div class="project-header">
                     <div class="project-icon">🔐</div>
                     <h3>Análise e Validação de Senhas</h3>
@@ -230,8 +251,7 @@ Se o usuário não for encontrado: O sistema intercepta o fluxo e abre dinamicam
                 </div>
             </div>
 
-            <!-- Projeto 6 -->
-            <div class="project-card">
+            <div class="project-card" id="proj-editais">
                 <div class="project-header">
                     <div class="project-icon">🤖</div>
                     <h3>Monitoramento de Editais (Web Scraping + Telegram)</h3>
@@ -252,7 +272,6 @@ Se o usuário não for encontrado: O sistema intercepta o fluxo e abre dinamicam
             </div>
         </section>
 
-        <!-- TECNOLOGIAS -->
         <section id="tecnologias" class="page">
             <h1>🛠️ Stack Tecnológica & Competências</h1>
             <div class="subtitle">Uma visão geral das ferramentas e linguagens que domino para desenvolver projetos ponta a ponta.</div>
@@ -285,7 +304,6 @@ Se o usuário não for encontrado: O sistema intercepta o fluxo e abre dinamicam
             </div>
         </section>
 
-        <!-- CONTATO -->
         <section id="contato" class="page">
             <h1>📬 Vamos construir algo juntos?</h1>
             <div class="subtitle">Sinta-se à vontade para entrar em contato para projetos, parcerias ou trocar uma ideia sobre tecnologia.</div>
@@ -310,16 +328,185 @@ Se o usuário não for encontrado: O sistema intercepta o fluxo e abre dinamicam
         </section>
     </main>
 
+    <div id="previewModal" class="image-modal" onclick="closeImage()">
+        <span class="modal-close" onclick="closeImage()">&times;</span>
+        <img class="modal-content" id="modalImg" onclick="event.stopPropagation()">
+    </div>
+
+    <div class="bot-container">
+        <div class="bot-bubble" id="botBubble">
+            <div id="botText">Olá! Eu sou o assistente de automação do Mauricio. Quer fazer um tour rápido pelo portfólio?</div>
+            <div class="bot-buttons" id="botBtns">
+                <button class="bot-btn secondary" id="btnRecusar">Não, vlw</button>
+                <button class="bot-btn" id="btnAceitar">Bora!</button>
+            </div>
+        </div>
+        <div class="bot-avatar" id="botAvatar">
+            <div class="bot-pulse"></div>
+            🤖
+        </div>
+    </div>
+
     <script>
         function showPage(pageId) {
-            // Oculta todas as páginas
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            // Remove classe ativa de todos os botões
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             
-            // Ativa a página e o botão correspondente
-            document.getElementById(pageId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            const targetBtn = document.getElementById('nav-' + pageId);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+            }
+        }
+
+        // LÓGICA DO MODAL LIGHTBOX (EXPANDIR IMAGENS)
+        const modal = document.getElementById('previewModal');
+        const modalImg = document.getElementById('modalImg');
+
+        document.querySelectorAll('.project-gallery img').forEach(img => {
+            img.addEventListener('click', function() {
+                modal.classList.add('open');
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+            });
+        });
+
+        function closeImage() { modal.classList.remove('open'); }
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeImage(); });
+
+        // --- SISTEMA DE TOUR DO ROBÔ (BLINDAGEM DE ESCOPO COM EXPANSÃO AUTOMÁTICA) ---
+        const botContainer = document.querySelector('.bot-container');
+        const botBubble = document.getElementById('botBubble');
+        const botText = document.getElementById('botText');
+        const botBtns = document.getElementById('botBtns');
+        const botAvatar = document.getElementById('botAvatar');
+        let tourStep = 0;
+
+        setTimeout(() => {
+            botBubble.style.display = 'block';
+        }, 1200);
+
+        botAvatar.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (botBubble.style.display === 'none' || botBubble.style.display === '') {
+                botBubble.style.display = 'block';
+                resetBotMsg();
+            } else {
+                botBubble.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (botContainer && !botContainer.contains(event.target)) {
+                botBubble.style.display = 'none';
+            }
+        });
+
+        botBtns.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const target = e.target;
+            
+            if (target.id === 'btnRecusar') {
+                botBubble.style.display = 'none';
+            } 
+            else if (target.id === 'btnAceitar') {
+                startTour();
+            } 
+            else if (target.classList.contains('btn-avancar')) {
+                nextTourStep();
+            } 
+            else if (target.classList.contains('btn-finalizar')) {
+                resetBotMsg();
+            }
+        });
+
+        function resetBotMsg() {
+            tourStep = 0;
+            closeImage();
+            botText.innerHTML = "Olá! Eu sou o assistente de automação do Mauricio. Quer fazer um tour rápido pelo portfólio?";
+            botBtns.innerHTML = `
+                <button class="bot-btn secondary" id="btnRecusar">Não, vlw</button>
+                <button class="bot-btn" id="btnAceitar">Bora!</button>
+            `;
+        }
+
+        function startTour() {
+            tourStep = 1;
+            showPage('sobre');
+            botText.innerHTML = "Aqui na aba <strong>Sobre Mim</strong> você confere a especialidade dele em criar Web Scrapers, APIs, fluxos de ETL e integrações inteligentes.";
+            botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Projetos ➡️</button>`;
+        }
+
+        function focarProjeto(cardId) {
+            closeImage(); // Fecha o modal do passo anterior
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const img = card.querySelector('.project-gallery img');
+                if (img && img.style.display !== 'none') {
+                    setTimeout(() => {
+                        img.click(); // Abre a imagem dinamicamente
+                    }, 350); // Aguarda a rolagem da página terminar
+                }
+            }
+        }
+
+        function nextTourStep() {
+            tourStep++;
+            
+            if (tourStep === 2) {
+                showPage('projetos');
+                focarProjeto('proj-glpi-ext');
+                botText.innerHTML = "<strong>Projeto 1: Extensão GLPI</strong><br>Desenvolvida em JavaScript puro para automação cirúrgica de chamados, criação em lote e segurança ponta a ponta com criptografia AES-GCM.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
+            } 
+            else if (tourStep === 3) {
+                focarProjeto('proj-glpi-fluxo');
+                botText.innerHTML = "<strong>Projeto 2: Formulário Inteligente GLPI</strong><br>Este script automatiza rotas complexas. Com o CPF, ele puxa o requerente, localidade, telefone do setor e cria telas dinâmicas de cadastro sem quebrar o fluxo do técnico.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
+            } 
+            else if (tourStep === 4) {
+                focarProjeto('proj-rh');
+                botText.innerHTML = "<strong>Projeto 3: Automação de RH</strong><br>Criado com n8n, este pipeline orquestra todo o processo seletivo: captura dados de formulários, atualiza planilhas, envia e-mails e agenda entrevistas no Google Calendar.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
+            }
+            else if (tourStep === 5) {
+                focarProjeto('proj-scraping');
+                botText.innerHTML = "<strong>Projeto 4: Scraping de E-commerce</strong><br>Robô estruturado em Python (BeautifulSoup e Requests) construído de forma modular para varredura ágil e extração limpa de dados do Mercado Livre.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
+            }
+            else if (tourStep === 6) {
+                focarProjeto('proj-dados');
+                botText.innerHTML = "<strong>Projeto 5: Engenharia de Dados</strong><br>Pipelines ETL robustos criados com Python e Apps Script. Eles higienizam dados brutos extraídos do service desk e alimentam painéis interativos no Looker Studio.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
+            }
+            else if (tourStep === 7) {
+                focarProjeto('proj-senhas');
+                botText.innerHTML = "<strong>Projeto 6: Validador de Senhas</strong><br>Um utilitário em Python focado em cibersegurança que faz o cálculo de entropia bit a bit e consome a API Have I Been Pwned para checar vazamentos históricos.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Último Projeto ➡️</button>`;
+            }
+            else if (tourStep === 8) {
+                focarProjeto('proj-editais');
+                botText.innerHTML = "<strong>Projeto 7: Monitor de Editais</strong><br>Um Web Scraper inteligente rodando em infraestrutura serverless (GitHub Actions) com Selenium que vigia editais abertos e envia alertas na hora via Telegram API.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Tecnologias 🛠️</button>`;
+            }
+            else if (tourStep === 9) {
+                closeImage();
+                showPage('tecnologias');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                botText.innerHTML = "Na aba de <strong>Tecnologias</strong> você vê a infra, frameworks corporativos e as linguagens de domínio, como Python, Tampermonkey, SQL e n8n.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Contato 📬</button>`;
+            } 
+            else if (tourStep === 10) {
+                showPage('contato');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                botText.innerHTML = "Precisa automatizar rotinas ou extrair inteligência de dados operacionais? Fale com ele agora via WhatsApp ou LinkedIn!";
+                botBtns.innerHTML = `<button class="bot-btn btn-finalizar">Finalizar Tour 🤝</button>`;
+            }
         }
     </script>
 </body>
