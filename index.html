@@ -144,7 +144,118 @@
         .bot-avatar { width: 65px; height: 65px; background: radial-gradient(circle, #38bdf8 0%, #0ea5e9 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; cursor: pointer; box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3); transition: transform 0.2s; animation: float Avatar 3s ease-in-out infinite; position: relative; border: 2px solid #fff; }
         .bot-avatar:hover { transform: scale(1.05); }
         .bot-pulse { position: absolute; width: 100%; height: 100%; background-color: #38bdf8; border-radius: 50%; z-index: -1; animation: pulse 2s infinite; opacity: 0; }
+        /* ===== Robô Animado ===== */
 
+.bot-avatar{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background: radial-gradient(circle,#38bdf8 0%,#0ea5e9 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    position:relative;
+    overflow:visible;
+}
+
+.robot{
+    position:relative;
+    animation:robotFloat 2.8s ease-in-out infinite;
+}
+
+.robot-head{
+    width:34px;
+    height:30px;
+    background:#fff;
+    border:2px solid #0f172a;
+    border-radius:9px;
+    position:relative;
+    box-shadow:
+        0 0 12px rgba(56,189,248,.45),
+        inset 0 -3px 0 rgba(0,0,0,.08);
+}
+
+.robot-eye{
+    width:6px;
+    height:6px;
+    background:#00e5ff;
+    border-radius:50%;
+    position:absolute;
+    top:9px;
+    animation:blink 3s infinite;
+    box-shadow:0 0 8px #00e5ff;
+}
+
+.robot-eye.left{
+    left:8px;
+}
+
+.robot-eye.right{
+    right:8px;
+}
+
+.robot-mouth{
+    position:absolute;
+    width:12px;
+    height:3px;
+    background:#0f172a;
+    border-radius:20px;
+    bottom:6px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.robot-antena{
+    position:absolute;
+    width:2px;
+    height:9px;
+    background:#fff;
+    left:50%;
+    transform:translateX(-50%);
+    top:-8px;
+}
+
+.robot-antena::after{
+    content:"";
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:#00e5ff;
+    border-radius:50%;
+    left:50%;
+    top:-6px;
+    transform:translateX(-50%);
+    box-shadow:0 0 12px #00e5ff;
+    animation:antennaGlow 1.4s infinite alternate;
+}
+
+@keyframes robotFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+@keyframes blink{
+    0%,90%,100%{
+        transform:scaleY(1);
+    }
+    92%,96%{
+        transform:scaleY(.15);
+    }
+}
+
+@keyframes antennaGlow{
+    from{
+        box-shadow:0 0 5px #00e5ff;
+    }
+    to{
+        box-shadow:0 0 18px #00e5ff;
+    }
+}
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-6px); }
@@ -495,10 +606,19 @@
             </div>
         </div>
         <div class="bot-avatar" id="botAvatar">
-            <div class="bot-pulse"></div>
-            🤖
+    <div class="bot-pulse"></div>
+
+    <div class="robot">
+        <div class="robot-antena"></div>
+
+        <div class="robot-head">
+            <div class="robot-eye left"></div>
+            <div class="robot-eye right"></div>
+            <div class="robot-mouth"></div>
         </div>
     </div>
+</div>
+    
 
     <script>
         // Inicializa o Canvas assim que o DOM carrega completamente
