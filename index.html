@@ -144,118 +144,102 @@
         .bot-avatar { width: 65px; height: 65px; background: radial-gradient(circle, #38bdf8 0%, #0ea5e9 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; cursor: pointer; box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3); transition: transform 0.2s; animation: float Avatar 3s ease-in-out infinite; position: relative; border: 2px solid #fff; }
         .bot-avatar:hover { transform: scale(1.05); }
         .bot-pulse { position: absolute; width: 100%; height: 100%; background-color: #38bdf8; border-radius: 50%; z-index: -1; animation: pulse 2s infinite; opacity: 0; }
+        
         /* ===== Robô Animado ===== */
+        .bot-avatar {
+            width:65px;
+            height:65px;
+            border-radius:50%;
+            background: radial-gradient(circle,#38bdf8 0%,#0ea5e9 100%);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            position:relative;
+            overflow:visible;
+        }
 
-.bot-avatar{
-    width:65px;
-    height:65px;
-    border-radius:50%;
-    background: radial-gradient(circle,#38bdf8 0%,#0ea5e9 100%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    position:relative;
-    overflow:visible;
-}
+        .robot {
+            position:relative;
+            animation:robotFloat 2.8s ease-in-out infinite;
+        }
 
-.robot{
-    position:relative;
-    animation:robotFloat 2.8s ease-in-out infinite;
-}
+        .robot-head {
+            width:34px;
+            height:30px;
+            background:#fff;
+            border:2px solid #0f172a;
+            border-radius:9px;
+            position:relative;
+            box-shadow:
+                0 0 12px rgba(56,189,248,.45),
+                inset 0 -3px 0 rgba(0,0,0,.08);
+        }
 
-.robot-head{
-    width:34px;
-    height:30px;
-    background:#fff;
-    border:2px solid #0f172a;
-    border-radius:9px;
-    position:relative;
-    box-shadow:
-        0 0 12px rgba(56,189,248,.45),
-        inset 0 -3px 0 rgba(0,0,0,.08);
-}
+        .robot-eye {
+            width:6px;
+            height:6px;
+            background:#00e5ff;
+            border-radius:50%;
+            position:absolute;
+            top:9px;
+            animation:blink 3s infinite;
+            box-shadow:0 0 8px #00e5ff;
+        }
 
-.robot-eye{
-    width:6px;
-    height:6px;
-    background:#00e5ff;
-    border-radius:50%;
-    position:absolute;
-    top:9px;
-    animation:blink 3s infinite;
-    box-shadow:0 0 8px #00e5ff;
-}
+        .robot-eye.left { left:8px; }
+        .robot-eye.right { right:8px; }
 
-.robot-eye.left{
-    left:8px;
-}
+        .robot-mouth {
+            position:absolute;
+            width:12px;
+            height:3px;
+            background:#0f172a;
+            border-radius:20px;
+            bottom:6px;
+            left:50%;
+            transform:translateX(-50%);
+        }
 
-.robot-eye.right{
-    right:8px;
-}
+        .robot-antena {
+            position:absolute;
+            width:2px;
+            height:9px;
+            background:#fff;
+            left:50%;
+            transform:translateX(-50%);
+            top:-8px;
+        }
 
-.robot-mouth{
-    position:absolute;
-    width:12px;
-    height:3px;
-    background:#0f172a;
-    border-radius:20px;
-    bottom:6px;
-    left:50%;
-    transform:translateX(-50%);
-}
+        .robot-antena::after {
+            content:"";
+            position:absolute;
+            width:8px;
+            height:8px;
+            background:#00e5ff;
+            border-radius:50%;
+            left:50%;
+            top:-6px;
+            transform:translateX(-50%);
+            box-shadow:0 0 12px #00e5ff;
+            animation:antennaGlow 1.4s infinite alternate;
+        }
 
-.robot-antena{
-    position:absolute;
-    width:2px;
-    height:9px;
-    background:#fff;
-    left:50%;
-    transform:translateX(-50%);
-    top:-8px;
-}
+        @keyframes robotFloat {
+            0%,100% { transform:translateY(0); }
+            50% { transform:translateY(-5px); }
+        }
 
-.robot-antena::after{
-    content:"";
-    position:absolute;
-    width:8px;
-    height:8px;
-    background:#00e5ff;
-    border-radius:50%;
-    left:50%;
-    top:-6px;
-    transform:translateX(-50%);
-    box-shadow:0 0 12px #00e5ff;
-    animation:antennaGlow 1.4s infinite alternate;
-}
+        @keyframes blink {
+            0%,90%,100% { transform:scaleY(1); }
+            92%,96% { transform:scaleY(.15); }
+        }
 
-@keyframes robotFloat{
-    0%,100%{
-        transform:translateY(0);
-    }
-    50%{
-        transform:translateY(-5px);
-    }
-}
-
-@keyframes blink{
-    0%,90%,100%{
-        transform:scaleY(1);
-    }
-    92%,96%{
-        transform:scaleY(.15);
-    }
-}
-
-@keyframes antennaGlow{
-    from{
-        box-shadow:0 0 5px #00e5ff;
-    }
-    to{
-        box-shadow:0 0 18px #00e5ff;
-    }
-}
+        @keyframes antennaGlow {
+            from { box-shadow:0 0 5px #00e5ff; }
+            to { box-shadow:0 0 18px #00e5ff; }
+        }
+        
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-6px); }
@@ -268,7 +252,6 @@
 </head>
 <body>
 
-    <!-- CANVAS GLOBAL DE FUNDO (Aparece em 100% das abas) -->
     <canvas id="circuitCanvas"></canvas>
 
     <nav>
@@ -281,10 +264,9 @@
     </nav>
 
     <main>
-        <!-- SOBRE MIM -->
         <section id="sobre" class="page active">
             <h1>💻 Portfólio – Mauricio Prado Pereira</h1>
-            <div class="subtitle">Automação • Dados • Technology da Informação</div>
+            <div class="subtitle">Automação • Dados • Tecnologia da Informação</div>
             
             <div class="profile-container content-card">
                 <div class="profile-pic-container">
@@ -309,7 +291,6 @@
             </div>
         </section>
 
-        <!-- CURRÍCULO -->
         <section id="curriculo" class="page">
             <div class="cv-header">
                 <div>
@@ -382,12 +363,29 @@
             </div>
         </section>
 
-        <!-- PROJETOS -->
         <section id="projetos" class="page">
             <h1>🚀 Projetos em Destaque</h1>
             <div class="subtitle">Construindo soluções robustas para resolver problemas reais de negócios e workflows.</div>
 
-            <!-- Projeto 1 -->
+            <div class="project-card" id="proj-pje-lote">
+                <div class="project-header">
+                    <div class="project-icon">🚀</div>
+                    <h3>Assistente de Automação PJe – Múltiplos Servidores</h3>
+                </div>
+                <div class="tech-badges">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Automação de Processos</span>
+                    <span class="tech-badge">Playwright</span>
+                    <span class="tech-badge">tkinter</span>
+                </div>
+                <div class="project-description">
+                    Uma solução de automação robusta desenvolvida para otimizar e acelerar o processo de provisionamento e configuração de usuários no sistema PJe (Processo Judicial Eletrônico). O sistema elimina tarefas repetitivas de digitação manual ao permitir o cadastro estruturado de servidores em lote (multi-servidor), contando com uma fila de processamento dinâmica e gestão automatizada de prazos e vigências.
+                </div>
+                <div class="project-gallery">
+                    <img src="imagens/image_42055c.png" alt="Configuração de Cadastro em Lote PJe" onerror="this.style.display='none'">
+                </div>
+            </div>
+
             <div class="project-card" id="proj-glpi-ext">
                 <div class="project-header">
                     <div class="project-icon">🔧</div>
@@ -406,7 +404,6 @@
                 </div>
             </div>
 
-            <!-- Projeto 1.2 -->
             <div class="project-card" id="proj-glpi-fluxo">
                 <div class="project-header">
                     <div class="project-icon">🔧</div>
@@ -431,7 +428,6 @@
                 </div>
             </div>
 
-            <!-- Projeto 2 -->
             <div class="project-card" id="proj-rh">
                 <div class="project-header">
                     <div class="project-icon">⚙️</div>
@@ -450,7 +446,6 @@
                 </div>
             </div>
 
-            <!-- Projeto 3 -->
             <div class="project-card" id="proj-scraping">
                 <div class="project-header">
                     <div class="project-icon">🌐</div>
@@ -470,7 +465,6 @@
                 </div>
             </div>
 
-            <!-- Projeto 4 -->
             <div class="project-card" id="proj-dados">
                 <div class="project-header">
                     <div class="project-icon">📊</div>
@@ -491,7 +485,6 @@
                 </div>
             </div>
 
-            <!-- Projeto 5 -->
             <div class="project-card" id="proj-senhas">
                 <div class="project-header">
                     <div class="project-icon">🔐</div>
@@ -510,7 +503,6 @@
                 </div>
             </div>
 
-            <!-- Projeto 6 -->
             <div class="project-card" id="proj-editais">
                 <div class="project-header">
                     <div class="project-icon">🤖</div>
@@ -532,7 +524,6 @@
             </div>
         </section>
 
-        <!-- TECNOLOGIAS -->
         <section id="tecnologias" class="page">
             <h1>🛠️ Stack Tecnológica & Competências</h1>
             <div class="subtitle">Uma visão geral das ferramentas e linguagens que domino para desenvolver projetos ponta a ponta.</div>
@@ -565,7 +556,6 @@
             </div>
         </section>
 
-        <!-- CONTATO -->
         <section id="contato" class="page">
             <h1>📬 Vamos construir algo juntos?</h1>
             <div class="subtitle">Sinta-se à vontade para entrar em contato para projetos, parcerias ou trocar uma ideia sobre tecnologia.</div>
@@ -590,13 +580,11 @@
         </section>
     </main>
 
-    <!-- ESTRUTURA DO MODAL (LIGHTBOX) -->
     <div id="previewModal" class="image-modal" onclick="closeImage()">
         <span class="modal-close" onclick="closeImage()">&times;</span>
         <img class="modal-content" id="modalImg" onclick="event.stopPropagation()">
     </div>
 
-    <!-- ESTRUTURA DO ROBÔ AUXILIAR -->
     <div class="bot-container">
         <div class="bot-bubble" id="botBubble">
             <div id="botText">Olá! Eu sou o assistente de automação do Mauricio. Quer fazer um tour rápido pelo portfólio?</div>
@@ -606,22 +594,19 @@
             </div>
         </div>
         <div class="bot-avatar" id="botAvatar">
-    <div class="bot-pulse"></div>
-
-    <div class="robot">
-        <div class="robot-antena"></div>
-
-        <div class="robot-head">
-            <div class="robot-eye left"></div>
-            <div class="robot-eye right"></div>
-            <div class="robot-mouth"></div>
+            <div class="bot-pulse"></div>
+            <div class="robot">
+                <div class="robot-antena"></div>
+                <div class="robot-head">
+                    <div class="robot-eye left"></div>
+                    <div class="robot-eye right"></div>
+                    <div class="robot-mouth"></div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-    
 
     <script>
-        // Inicializa o Canvas assim que o DOM carrega completamente
         document.addEventListener('DOMContentLoaded', () => {
             initGlobalCircuitAnimation();
         });
@@ -641,7 +626,7 @@
             }
         }
 
-        // LÓGICA DO MODAL LIGHTBOX (EXPANDIR IMAGENS)
+        // LÓGICA DO MODAL LIGHTBOX
         const modal = document.getElementById('previewModal');
         const modalImg = document.getElementById('modalImg');
 
@@ -656,7 +641,7 @@
         function closeImage() { modal.classList.remove('open'); }
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeImage(); });
 
-        // --- ENGINE DE ANIMAÇÃO DE CIRCUITO MATRICIAL GLOBAL (Fundo Interativo) ---
+        // --- ENGINE DE ANIMAÇÃO DE CIRCUITO ---
         let canvas, ctx, animationFrameId;
         let points = [];
         const maxPoints = 65;
@@ -751,7 +736,7 @@
             initGlobalCircuitAnimation();
         });
 
-        // --- SISTEMA DE TOUR DO ROBÔ ATUALIZADO (PASSO A PASSO DE PROJETOS) ---
+        // --- SISTEMA DE TOUR DO ROBÔ (PASSO A PASSO DE PROJETOS ATUALIZADO) ---
         const botContainer = document.querySelector('.bot-container');
         const botBubble = document.getElementById('botBubble');
         const botText = document.getElementById('botText');
@@ -829,47 +814,52 @@
             }
             else if (tourStep === 3) {
                 showPage('projetos');
-                scrollToElement('proj-glpi-ext');
-                botText.innerHTML = "<strong>Projeto 1: Extensão GLPI</strong><br>Desenvolvida em JavaScript puro para automação cirúrgica de chamados, criação em lote e segurança ponta a ponta com criptografia AES-GCM.";
+                scrollToElement('proj-pje-lote');
+                botText.innerHTML = "<strong>Projeto Destaque: Automação PJe</strong><br>Sistema robusto para provisionamento de usuários em lote no Processo Judicial Eletrônico, com controle dinâmico de vigências.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
-            } 
+            }
             else if (tourStep === 4) {
-                scrollToElement('proj-glpi-fluxo');
-                botText.innerHTML = "<strong>Projeto 2: Formulário Inteligente GLPI</strong><br>Este script automatiza rotas complexas. Com o CPF, ele puxa o requerente, localidade, telefone do setor e cria telas dinâmicas de cadastro.";
+                scrollToElement('proj-glpi-ext');
+                botText.innerHTML = "<strong>Projeto 2: Extensão GLPI</strong><br>Desenvolvida em JavaScript puro para automação cirúrgica de chamados, criação em lote e segurança ponta a ponta com criptografia AES-GCM.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             } 
             else if (tourStep === 5) {
-                scrollToElement('proj-rh');
-                botText.innerHTML = "<strong>Projeto 3: Automação de RH</strong><br>Criado com n8n, este pipeline orquestra todo o processo seletivo: captura dados de formulários, atualiza planilhas e agenda entrevistas.";
+                scrollToElement('proj-glpi-fluxo');
+                botText.innerHTML = "<strong>Projeto 3: Formulário Inteligente GLPI</strong><br>Este script automatiza rotas complexas. Com o CPF, ele puxa o requerente, localidade, telefone do setor e cria telas dinâmicas de cadastro.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
-            }
+            } 
             else if (tourStep === 6) {
-                scrollToElement('proj-scraping');
-                botText.innerHTML = "<strong>Projeto 4: Scraping de E-commerce</strong><br>Robô estruturado em Python (BeautifulSoup e Requests) construído de forma modular para extração limpa de dados do Mercado Livre.";
+                scrollToElement('proj-rh');
+                botText.innerHTML = "<strong>Projeto 4: Automação de RH</strong><br>Criado com n8n, este pipeline orquestra todo o processo seletivo: captura dados de formulários, atualiza planilhas e agenda entrevistas.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 7) {
-                scrollToElement('proj-dados');
-                botText.innerHTML = "<strong>Projeto 5: Engenharia de Dados</strong><br>Pipelines ETL robustos criados com Python e Apps Script para higienizar dados e alimentar painéis no Looker Studio.";
+                scrollToElement('proj-scraping');
+                botText.innerHTML = "<strong>Projeto 5: Scraping de E-commerce</strong><br>Robô estruturado em Python (BeautifulSoup e Requests) construído de forma modular para extração limpa de dados do Mercado Livre.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 8) {
-                scrollToElement('proj-senhas');
-                botText.innerHTML = "<strong>Projeto 6: Validador de Senhas</strong><br>Um utilitário em Python focado em cibersegurança que faz o cálculo de entropia e consome a API Have I Been Pwned.";
-                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Último Projeto ➡️</button>`;
+                scrollToElement('proj-dados');
+                botText.innerHTML = "<strong>Projeto 6: Engenharia de Dados</strong><br>Pipelines ETL robustos criados com Python e Apps Script para higienizar dados e alimentar painéis no Looker Studio.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 9) {
-                scrollToElement('proj-editais');
-                botText.innerHTML = "<strong>Projeto 7: Monitor de Editais</strong><br>Um Web Scraper inteligente rodando via GitHub Actions com Selenium que vigia editais abertos e envia alertas via Telegram.";
-                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Tecnologias 🛠️</button>`;
+                scrollToElement('proj-senhas');
+                botText.innerHTML = "<strong>Projeto 7: Validador de Senhas</strong><br>Um utilitário em Python focado em cibersegurança que faz o cálculo de entropia e consome a API Have I Been Pwned.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Último Projeto ➡️</button>`;
             }
             else if (tourStep === 10) {
+                scrollToElement('proj-editais');
+                botText.innerHTML = "<strong>Projeto 8: Monitor de Editais</strong><br>Um Web Scraper inteligente rodando via GitHub Actions com Selenium que vigia editais abertos e envia alertas via Telegram.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Tecnologias 🛠️</button>`;
+            }
+            else if (tourStep === 11) {
                 showPage('tecnologias');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 botText.innerHTML = "Na aba de <strong>Tecnologias</strong> você vê os frameworks corporativos e as linguagens de domínio, como Python, Tampermonkey, SQL e n8n.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Contato 📬</button>`;
             } 
-            else if (tourStep === 11) {
+            else if (tourStep === 12) {
                 showPage('contato');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 botText.innerHTML = "Precisa automatizar rotinas ou extrair inteligência de dados operacionais? Fale com ele agora via WhatsApp ou LinkedIn!";
