@@ -232,7 +232,7 @@
 
         @keyframes blink {
             0%,90%,100% { transform:scaleY(1); }
-            92%,96% { transform:scaleY(.15); }
+            22%,26% { transform:scaleY(.15); }
         }
 
         @keyframes antennaGlow {
@@ -367,10 +367,11 @@
             <h1>🚀 Projetos em Destaque</h1>
             <div class="subtitle">Construindo soluções robustas para resolver problemas reais de negócios e workflows.</div>
 
+            <!-- PROJETO 1 -->
             <div class="project-card" id="proj-pje-lote">
                 <div class="project-header">
                     <div class="project-icon">🚀</div>
-                    <h3>Assistente de Automação PJe – Múltiplos Servidores</h3>
+                    <h3>Assistente de Automação PJe – Múltiplos Servidores </h3>
                 </div>
                 <div class="tech-badges">
                     <span class="tech-badge">Python</span>
@@ -388,6 +389,35 @@
                 </div>
             </div>
 
+            <!-- PROJETO 2 (NOVO SMARTPJE) -->
+            <div class="project-card" id="proj-smartpje">
+                <div class="project-header">
+                    <div class="project-icon">💡</div>
+                    <h3>SmartPJe — Extensão para Navegação e Produtividade Jurídica</h3>
+                </div>
+                <div class="tech-badges">
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">Tampermonkey</span>
+                    <span class="tech-badge">Produtividade</span>
+                    <span class="tech-badge">TJMA</span>
+                </div>
+                <div class="project-description">
+                    O <strong>SmartPJe</strong> é uma extensão de navegador desenvolvida especificamente para otimizar o fluxo de trabalho dos analistas do setor DSSPJE do Tribunal de Justiça do Maranhão (TJMA) dentro do sistema Processo Judicial Eletrônico (PJe 1G e 2G).
+                    <br><br>
+                    <strong>Principais Funcionalidades:</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px; color: #cbd5e1; list-style-type: square;">
+                        <li style="margin-bottom: 8px;"><strong>Menu Flutuante e Dinâmico:</strong> Painel interativo e colapsável com atalhos rápidos para mais de 15 rotas nativas do PJe (1º e 2º Grau).</li>
+                        <li style="margin-bottom: 8px;"><strong>Autofill Inteligente de Datas e Visibilidade:</strong> Preenchimento automático inteligente de datas iniciais e botões auxiliares para somas rápidas (+6 meses, +1 ano, +2 anos). Injeta filtros rápidos como o botão "Todos" no campo de visibilidade de órgãos julgadores.</li>
+                        <li style="margin-bottom: 8px;"><strong>Busca em Tempo Real (Wiki DSSPJE):</strong> Campo de consulta instantânea integrado ao menu que filtra localmente centenas de FAQs, procedimentos, resoluções e incidentes técnicos, abrindo os artigos em formato popup centralizado sem tirar o usuário de sua tela de trabalho.</li>
+                    </ul>
+                </div>
+                <div class="project-gallery">
+                    <img src="imagens/pje1.png" alt="SmartPJe Funcionalidades 1" onerror="this.style.display='none'">
+                    <img src="imagens/pje2.png" alt="SmartPJe Funcionalidades 2" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <!-- PROJETO 3 -->
             <div class="project-card" id="proj-glpi-ext">
                 <div class="project-header">
                     <div class="project-icon">🔧</div>
@@ -406,6 +436,7 @@
                 </div>
             </div>
 
+            <!-- PROJETO 4 -->
             <div class="project-card" id="proj-glpi-fluxo">
                 <div class="project-header">
                     <div class="project-icon">🔧</div>
@@ -430,6 +461,7 @@
                 </div>
             </div>
 
+            <!-- PROJETO 5 -->
             <div class="project-card" id="proj-rh">
                 <div class="project-header">
                     <div class="project-icon">⚙️</div>
@@ -448,6 +480,7 @@
                 </div>
             </div>
 
+            <!-- PROJETO 6 -->
             <div class="project-card" id="proj-scraping">
                 <div class="project-header">
                     <div class="project-icon">🌐</div>
@@ -467,6 +500,7 @@
                 </div>
             </div>
 
+            <!-- PROJETO 7 -->
             <div class="project-card" id="proj-dados">
                 <div class="project-header">
                     <div class="project-icon">📊</div>
@@ -487,6 +521,7 @@
                 </div>
             </div>
 
+            <!-- PROJETO 8 -->
             <div class="project-card" id="proj-senhas">
                 <div class="project-header">
                     <div class="project-icon">🔐</div>
@@ -505,10 +540,11 @@
                 </div>
             </div>
 
+            <!-- PROJETO 9 -->
             <div class="project-card" id="proj-editais">
                 <div class="project-header">
                     <div class="project-icon">🤖</div>
-                    <h3>Monitoramento de Editais (Web Scraping + Telegram)</h3>
+                    <h3>Monitoramento de Editais (Web Scraping + Telegram) </h3>
                 </div>
                 <div class="tech-badges">
                     <span class="tech-badge">Selenium</span>
@@ -632,12 +668,14 @@
         const modal = document.getElementById('previewModal');
         const modalImg = document.getElementById('modalImg');
 
-        document.querySelectorAll('.project-gallery img').forEach(img => {
-            img.addEventListener('click', function() {
+        // Adiciona evento de clique a imagens de galerias dinamicamente
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.project-gallery img')) {
+                const img = e.target;
                 modal.classList.add('open');
-                modalImg.src = this.src;
-                modalImg.alt = this.alt;
-            });
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+            }
         });
 
         function closeImage() { modal.classList.remove('open'); }
@@ -738,7 +776,7 @@
             initGlobalCircuitAnimation();
         });
 
-        // --- SISTEMA DE TOUR DO ROBÔ (PASSO A PASSO DE PROJETOS ATUALIZADO) ---
+        // --- SISTEMA DE TOUR DO ROBÔ (PASSO A PASSO ATUALIZADO COM NOVO PROJETO) ---
         const botContainer = document.querySelector('.bot-container');
         const botBubble = document.getElementById('botBubble');
         const botText = document.getElementById('botText');
@@ -817,51 +855,56 @@
             else if (tourStep === 3) {
                 showPage('projetos');
                 scrollToElement('proj-pje-lote');
-                botText.innerHTML = "<strong>Projeto Destaque: Automação PJe</strong><br>Sistema robusto para provisionamento de usuários em lote no Processo Judicial Eletrônico, com controle dinâmico de vigências.";
+                botText.innerHTML = "<strong>Destaque: Automação PJe em Lote</strong><br>Sistema robusto para provisionamento de usuários no Processo Judicial Eletrônico com controle dinâmico de vigências.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 4) {
-                scrollToElement('proj-glpi-ext');
-                botText.innerHTML = "<strong>Projeto 2: Extensão GLPI</strong><br>Desenvolvida em JavaScript puro para automação cirúrgica de chamados, criação em lote e segurança ponta a ponta com criptografia AES-GCM.";
+                scrollToElement('proj-smartpje');
+                botText.innerHTML = "<strong>Novo: SmartPJe Extensão</strong><br>Otimização cirúrgica para o fluxo de analistas do TJMA com menu flutuante, atalhos do sistema, preenchimento inteligente e Wiki DSSPJE integrada.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
-            } 
+            }
             else if (tourStep === 5) {
-                scrollToElement('proj-glpi-fluxo');
-                botText.innerHTML = "<strong>Projeto 3: Formulário Inteligente GLPI</strong><br>Este script automatiza rotas complexas. Com o CPF, ele puxa o requerente, localidade, telefone do setor e cria telas dinâmicas de cadastro.";
+                scrollToElement('proj-glpi-ext');
+                botText.innerHTML = "<strong>Projeto 3: Extensão GLPI</strong><br>Desenvolvida em JavaScript puro para automação de chamados, criação em lote e criptografia AES-GCM ponta a ponta.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             } 
             else if (tourStep === 6) {
-                scrollToElement('proj-rh');
-                botText.innerHTML = "<strong>Projeto 4: Automação de RH</strong><br>Criado com n8n, este pipeline orquestra todo o processo seletivo: captura dados de formulários, atualiza planilhas e agenda entrevistas.";
+                scrollToElement('proj-glpi-fluxo');
+                botText.innerHTML = "<strong>Projeto 4: Formulário Inteligente GLPI</strong><br>Script que valida dados como CPF/Matrícula do servidor e autocompleta instantaneamente as dependências locais e geográficas.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
-            }
+            } 
             else if (tourStep === 7) {
-                scrollToElement('proj-scraping');
-                botText.innerHTML = "<strong>Projeto 5: Scraping de E-commerce</strong><br>Robô estruturado em Python (BeautifulSoup e Requests) construído de forma modular para extração limpa de dados do Mercado Livre.";
+                scrollToElement('proj-rh');
+                botText.innerHTML = "<strong>Projeto 5: Automação de RH</strong><br>Criado com n8n, este pipeline orquestra todo o processo seletivo: captura dados de formulários, atualiza planilhas e agenda entrevistas.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 8) {
-                scrollToElement('proj-dados');
-                botText.innerHTML = "<strong>Projeto 6: Engenharia de Dados</strong><br>Pipelines ETL robustos criados com Python e Apps Script para higienizar dados e alimentar painéis no Looker Studio.";
+                scrollToElement('proj-scraping');
+                botText.innerHTML = "<strong>Projeto 6: Scraping de E-commerce</strong><br>Robô estruturado em Python (BeautifulSoup e Requests) construído de forma modular para extração limpa de dados do Mercado Livre.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 9) {
-                scrollToElement('proj-senhas');
-                botText.innerHTML = "<strong>Projeto 7: Validador de Senhas</strong><br>Um utilitário em Python focado em cibersegurança que faz o cálculo de entropia e consome a API Have I Been Pwned.";
-                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Último Projeto ➡️</button>`;
+                scrollToElement('proj-dados');
+                botText.innerHTML = "<strong>Projeto 7: Engenharia de Dados</strong><br>Pipelines ETL robustos criados com Python e Apps Script para higienizar dados e alimentar painéis no Looker Studio.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Próximo Projeto ➡️</button>`;
             }
             else if (tourStep === 10) {
-                scrollToElement('proj-editais');
-                botText.innerHTML = "<strong>Projeto 8: Monitor de Editais</strong><br>Um Web Scraper inteligente rodando via GitHub Actions com Selenium que vigia editais abertos e envia alertas via Telegram.";
-                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Tecnologias 🛠️</button>`;
+                scrollToElement('proj-senhas');
+                botText.innerHTML = "<strong>Projeto 8: Validador de Senhas</strong><br>Um utilitário em Python focado em cibersegurança que faz o cálculo de entropia e consome a API Have I Been Pwned.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Último Projeto ➡️</button>`;
             }
             else if (tourStep === 11) {
+                scrollToElement('proj-editais');
+                botText.innerHTML = "<strong>Projeto 9: Monitor de Editais</strong><br>Um Web Scraper inteligente rodando via GitHub Actions com Selenium que vigia editais abertos e envia alertas via Telegram.";
+                botBtns.innerHTML = `<button class="bot-btn btn-avancar">Ver Tecnologias 🛠️</button>`;
+            }
+            else if (tourStep === 12) {
                 showPage('tecnologias');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 botText.innerHTML = "Na aba de <strong>Tecnologias</strong> você vê os frameworks corporativos e as linguagens de domínio, como Python, Tampermonkey, SQL e n8n.";
                 botBtns.innerHTML = `<button class="bot-btn btn-avancar">Contato 📬</button>`;
             } 
-            else if (tourStep === 12) {
+            else if (tourStep === 13) {
                 showPage('contato');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 botText.innerHTML = "Precisa automatizar rotinas ou extrair inteligência de dados operacionais? Fale com ele agora via WhatsApp ou LinkedIn!";
